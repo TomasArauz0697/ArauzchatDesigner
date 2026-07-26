@@ -88,7 +88,7 @@ export default function App() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const profileImageInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if ('Notification' in window && Notification.permission !== 'granted') {
@@ -293,7 +293,7 @@ export default function App() {
       await addDoc(collection(db, 'messages'), {
         text: newMessage.trim(),
         email: user.email,
-        senderName: userProfile.name || user.email.split('@')[0],
+        senderName: userProfile.name || user?.email?.split('@')[0] || 'Usuario',
         senderPhoto: userProfile.photoUrl || '',
         recipientEmail: selectedContact,
         createdAt: serverTimestamp(),
