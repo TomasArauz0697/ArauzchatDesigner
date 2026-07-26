@@ -380,7 +380,7 @@ export default function App() {
         await addDoc(collection(db, 'messages'), {
           imageUrl: reader.result as string,
           email: user.email,
-          senderName: userProfile.name || user.email.split('@')[0],
+          senderName: userProfile.name || user?.email?.split('@')[0] || 'Usuario',
           senderPhoto: userProfile.photoUrl || '',
           recipientEmail: selectedContact,
           createdAt: serverTimestamp(),
