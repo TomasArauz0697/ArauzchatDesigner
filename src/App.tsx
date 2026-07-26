@@ -55,7 +55,7 @@ export default function App() {
   const [loadingAuth, setLoadingAuth] = useState(true);
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
-  const [firebaseUsersList, setFirebaseUsersList] = useState<UserProfile & { email: string }[]>([]);
+  const [firebaseUsersList, setFirebaseUsersList] = useState<(UserProfile & { email: string })[]>([]);
   const [selectedContact, setSelectedContact] = useState<string | null>('Global Terminal');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
@@ -236,7 +236,7 @@ export default function App() {
           role: data.role
         });
       });
-      setFirebaseUsersList(users);
+      setFirebaseUsersList(users as (UserProfile & { email: string })[]);
     }, (error) => {
       console.error("Error cargando usuarios de Firebase:", error);
     });
